@@ -23,9 +23,9 @@
 
 
   	self.session = [[AVCaptureSession alloc] init];
-	self.session.sessionPreset = AVCaptureSessionPreset352x288;
+	self.session.sessionPreset = AVCaptureSessionPreset1024x768;
  
-	self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+	self.device = 2;//[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     self.input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
 
     [self.session addInput:self.input];
@@ -73,7 +73,7 @@
     CGContextRelease(newContext);
     CGColorSpaceRelease(colorSpace);
     
-    UIImage *image= [UIImage imageWithCGImage:newImage scale:1.0 orientation:UIImageOrientationUp];
+    UIImage *image= [UIImage imageWithCGImage:newImage scale:1.0 orientation:UIImageOrientationRightMirrored];
     
     NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
     NSString * encodedString  = [imageData base64Encoding];
