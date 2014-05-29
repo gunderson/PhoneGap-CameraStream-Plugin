@@ -40,7 +40,7 @@
     [self.output setSampleBufferDelegate:(id)self queue:queue]; 
     [self.session addOutput:self.output];
     [self.session startRunning];
-    dispatch_release(queue);
+    // dispatch_release(queue);
     self.videoConnection = [self.output connectionWithMediaType:AVMediaTypeVideo];
     
 }
