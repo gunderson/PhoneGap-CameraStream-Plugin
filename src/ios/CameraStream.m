@@ -23,7 +23,7 @@
 
 
   	self.session = [[AVCaptureSession alloc] init];
-	self.session.sessionPreset = AVCaptureSessionPresetHigh;
+	self.session.sessionPreset = AVCaptureSessionPreset352x288;
  
     self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 	// self.device = [self frontFacingCameraIfAvailable];
