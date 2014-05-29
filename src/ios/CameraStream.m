@@ -23,9 +23,10 @@
 
 
   	self.session = [[AVCaptureSession alloc] init];
-	self.session.sessionPreset = AVCaptureSessionPreset1024x768;
+	self.session.sessionPreset = AVCaptureSessionPreset352x288;
  
-	self.device = 2;//[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+	// self.device = [self frontFacingCameraIfAvailable];
     self.input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
 
     [self.session addInput:self.input];
@@ -84,4 +85,27 @@
     CGImageRelease(newImage);
     CVPixelBufferUnlockBaseAddress(imageBuffer,0);
 }
+
+-(AVCaptureDevice *)frontFacingCameraIfAvailable
+{
+    NSArray *videoDevices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+    AVCaptureDevice *captureDevice = nil;
+    for (AVCaptureDevice *device in videoDevices)
+    {
+        if (device.position == AVCaptureDevicePositionFront)
+        {
+            captureDevice = device;
+            break;
+        }
+    }
+
+    //  couldn't find one on the front, so just get the default video device.
+    if ( ! captureDevice)
+    {
+        captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    }
+
+    return captureDevice;
+}
+
 @end
