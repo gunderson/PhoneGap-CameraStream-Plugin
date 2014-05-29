@@ -23,7 +23,7 @@
 
 
   	self.session = [[AVCaptureSession alloc] init];
-	self.session.sessionPreset = AVCaptureSessionPreset352x288;
+	self.session.sessionPreset = AVCaptureSessionPresetHigh;
  
     self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 	// self.device = [self frontFacingCameraIfAvailable];
@@ -74,7 +74,7 @@
     CGContextRelease(newContext);
     CGColorSpaceRelease(colorSpace);
     
-    UIImage *image= [UIImage imageWithCGImage:newImage scale:1.0 orientation:UIImageOrientationRightMirrored];
+    UIImage *image= [UIImage imageWithCGImage:newImage scale:1.0 orientation:UIImageOrientationLeftMirrored];
     
     NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
     NSString * encodedString  = [imageData base64Encoding];
